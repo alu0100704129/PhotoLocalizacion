@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <title>Hello!</title>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script>
+(function ($) {
+    $(document).ready(function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    var lat = position.coords.latitude;
+                    var lng = position.coords.longitude;
+                    $("#banner").load("/prompt.php?lat="+lat+"&lng="+lng);
+                },
+                function (error) {
+                    console.log("An error occurred obtaining position.");
+                });
+        }
+        else {
+            $("#banner").html("Default content goes here"); 
+        }
+    });
+})(jQuery);
+  </script>
+ </head>
+ <body>
+  <div id="banner"></div>
+ </body>
+</html>
